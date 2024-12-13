@@ -22,8 +22,9 @@ defmodule ElixirToolsWeb.GridParserLive do
 
     text_map = text |> parse_text_to_map()
 
-    rows_count = text |> String.split("\n", trim: true) |> Enum.count()
-    cols_count = text |> String.split("\n", trim: true) |> Enum.at(0) |> String.length()
+    rows = text |> String.split("\n", trim: true)
+    rows_count = rows |> Enum.count()
+    cols_count = rows |> Enum.at(0) |> String.length()
     socket = assign(socket, :cols_count, cols_count)
 
     socket = assign(socket, :rows_count, rows_count)
