@@ -16,7 +16,10 @@
 <!-- Table -->
   <div class="w-70-p overflow-x-auto">
     <%= if @cols_count > 0 do %>
-      <table class="min-w-full table-auto border-collapse border border-gray-300">
+      <table 
+        id="data-grid"
+        class="min-w-full table-auto border-collapse border border-gray-300 with-cursor-on-hover"
+        phx-hook="TableHook">
         <thead>
           <tr>
             <th class="px-4 py-2 border border-gray-300"></th>
@@ -30,7 +33,7 @@
             <tr>
               <td class="px-4 py-2 border border-gray-300"><strong>Row {row}</strong></td>
               <%= for col <- 0..@cols_count-1 do %>
-                <td class="px-4 py-2 border border-gray-300">
+                <td class="px-4 py-2 border border-gray-300" data-row={row} data-col={col}>
                   {Map.get(@text_map, {row, col}) || " "}
                 </td>
               <% end %>

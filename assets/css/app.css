@@ -14,3 +14,7 @@
 .h-30rem {
     height: 30rem;
 }
+
+table.with-cursor-on-hover tr:hover {
+    cursor: pointer;
+}
