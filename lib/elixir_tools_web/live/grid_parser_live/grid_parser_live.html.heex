@@ -6,37 +6,40 @@
   <!-- Textarea -->
   <textarea
     id="input-area"
-    phx-change="update_cols"
     class="w-30-p h-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500 h-30rem"
-    phx-change="parse_text"
-    phx-debounce="300"
     rows="20"
     cols="50"
+    phx-hook="TextAreaHook"
   >
-    {@input_text}
   </textarea>
   
 <!-- Table -->
   <div class="w-70-p overflow-x-auto">
-    <table class="min-w-full table-auto border-collapse border border-gray-300">
-      <thead>
-        <tr>
-          <th class="px-4 py-2 border border-gray-300"></th>
-          <%= for col <- 0..@cols_count-1 do %>
-            <th class="px-4 py-2 border border-gray-300">Col {col}</th>
-          <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <%= for row <- 0..@rows_count-1 do %>
+    <%= if @cols_count > 0 do %>
+      <table class="min-w-full table-auto border-collapse border border-gray-300">
+        <thead>
           <tr>
-            <td class="px-4 py-2 border border-gray-300"><strong>Row {row}</strong></td>
+            <th class="px-4 py-2 border border-gray-300"></th>
             <%= for col <- 0..@cols_count-1 do %>
-              <td class="px-4 py-2 border border-gray-300"><%= Map.get(@parsed_map, {row, col}) || "Not Found" %></td>
+              <th class="px-4 py-2 border border-gray-300">Col {col}</th>
             <% end %>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <%= for row <- 0..@rows_count-1 do %>
+            <tr>
+              <td class="px-4 py-2 border border-gray-300"><strong>Row {row}</strong></td>
+              <%= for col <- 0..@cols_count-1 do %>
+                <td class="px-4 py-2 border border-gray-300">
+                  {Map.get(@text_map, {row, col}) || " "}
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p class="text-center text-gray-500">No data grid to display</p>
+    <% end %>
   </div>
 </div>
