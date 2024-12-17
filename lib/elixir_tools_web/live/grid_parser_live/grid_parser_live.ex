@@ -22,11 +22,11 @@ defmodule ElixirToolsWeb.GridParserLive do
 
     text_map =
       rows
-      |> Enum.with_index(fn element, index -> {index, element} end)
+      |> Enum.with_index(&{&2, &1})
       |> Enum.reduce(%{}, fn {row_index, line}, acc ->
         line
         |> String.graphemes()
-        |> Enum.with_index(fn element, index -> {index, element} end)
+        |> Enum.with_index(&{&2, &1})
         |> Enum.reduce(acc, fn {col_index, char}, inner_acc ->
           Map.put(inner_acc, {row_index, col_index}, char)
         end)
