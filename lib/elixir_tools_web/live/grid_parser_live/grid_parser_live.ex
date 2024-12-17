@@ -3,33 +3,8 @@ defmodule ElixirToolsWeb.GridParserLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    # # Let's assume a fixed cols_count for now
-    # text = """
-    # ............
-    # ........0...
-    # .....0......
-    # .......0....
-    # ....0.......
-    # ......A.....
-    # ............
-    # ............
-    # ........A...
-    # .........A..
-    # """
-
-    # text_map = text |> parse_text_to_map()
-
-    # rows = text |> String.split("\n", trim: true)
-    # rows_count = rows |> Enum.count()
-    # cols_count = rows |> Enum.at(0) |> String.length()
-    # socket = assign(socket, :cols_count, cols_count)
-
-    # socket = assign(socket, :rows_count, rows_count)
-    # socket = assign(socket, input_text: "", text_map: text_map)
     socket =
-      assign(socket, text_map: %{})
-      |> assign(:cols_count, 0)
-      |> assign(:rows_count, 0)
+      socket |> assign_result(%{}, 0, 0)
 
     {:ok, socket}
   end
