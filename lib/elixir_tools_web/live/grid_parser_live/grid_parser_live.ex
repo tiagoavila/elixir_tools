@@ -17,6 +17,8 @@ defmodule ElixirToolsWeb.GridParserLive do
     {:noreply, socket}
   end
 
+  defp parse_text_to_map(""), do: {%{}, 0, 0}
+
   defp parse_text_to_map(text) do
     rows = text |> String.trim() |> String.split("\n", trim: true)
 
